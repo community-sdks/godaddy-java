@@ -1,36 +1,63 @@
 # CountriesService
 
-Country and market metadata endpoints used across purchase flows.
-
 ## Accessor
 
 ```java
-var service = client.countries();
+var serviceAccessor = client.countries();
 ```
 
-## Endpoints
+## Method Index
+
+- `getCountries`: `GetCountriesResponse`
+- `getCountry`: `GetCountryResponse`
 
 ### getCountries
 
-Calls `GET /v1/countries`.
+Returns: `GetCountriesResponse`
 
 ```java
-var response = client.countries().getCountries("sample");
+import io.github.communitysdks.godaddy.dto.countries.requests.GetCountriesRequest;
+GetCountriesRequest request = new GetCountriesRequest(
+    "value",
+);
+var response = client.countries().getCountries(request);
 ```
 
 ```json
-{}
+[
+  {
+    "callingCode": "value",
+    "countryKey": "US",
+    "label": "value"
+  }
+]
 ```
 
 ### getCountry
 
-Calls `GET /v1/countries/{countryKey}`.
+Returns: `GetCountryResponse`
 
 ```java
-var response = client.countries().getCountry("sample", "sample");
+import io.github.communitysdks.godaddy.dto.countries.requests.GetCountryRequest;
+GetCountryRequest request = new GetCountryRequest(
+    "value",
+    "value",
+);
+var response = client.countries().getCountry(request);
 ```
 
 ```json
-{}
+[
+  {
+    "callingCode": "value",
+    "countryKey": "US",
+    "label": "value",
+    "states": [
+      {
+        "label": "value",
+        "stateKey": "value"
+      }
+    ]
+  }
+]
 ```
-

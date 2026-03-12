@@ -1,72 +1,216 @@
 # SubscriptionsService
 
-Subscription listing and management endpoints for recurring products.
-
 ## Accessor
 
 ```java
-var service = client.subscriptions();
+var serviceAccessor = client.subscriptions();
 ```
 
-## Endpoints
+## Method Index
+
+- `list`: `ListResponse`
+- `productGroups`: `ProductGroupsResponse`
+- `get`: `GetResponse`
+- `update`: `UpdateResponse`
+- `cancel`: `CancelResponse`
 
 ### list
 
-Calls `GET /v1/subscriptions`.
+Returns: `ListResponse`
 
 ```java
-var response = client.subscriptions().list("header-value", "header-value", "header-value", List.of("sample"), List.of("sample"), 1L, 1L, "sample");
+import io.github.communitysdks.godaddy.dto.subscriptions.requests.ListRequest;
+ListRequest request = new ListRequest(
+    "value",
+    "value",
+    "value",
+    java.util.List.of("value"),
+);
+var response = client.subscriptions().list(request);
 ```
 
 ```json
-{}
+{
+  "pagination": {
+    "first": "value",
+    "last": "value",
+    "next": "value",
+    "previous": "value",
+    "total": 1
+  },
+  "subscriptions": [
+    {
+      "addons": [
+        {
+          "commitment": "PAID",
+          "pfid": 1,
+          "quantity": 1
+        }
+      ],
+      "billing": {
+        "commitment": "PAID",
+        "pastDueTypes": [
+          "ADDON"
+        ],
+        "renewAt": "value",
+        "status": "CURRENT"
+      },
+      "cancelable": true,
+      "createdAt": "value",
+      "expiresAt": "value",
+      "label": "value",
+      "launchUrl": "value",
+      "paymentProfileId": 1,
+      "priceLocked": true,
+      "product": {
+        "label": "value",
+        "namespace": "value",
+        "pfid": 1,
+        "productGroupKey": "value",
+        "renewalPeriod": 1,
+        "renewalPeriodUnit": "MONTH",
+        "renewalPfid": 1,
+        "supportBillOn": true
+      },
+      "relations": {
+        "children": [
+          "value"
+        ],
+        "parent": "value"
+      },
+      "renewAuto": true,
+      "renewable": true,
+      "status": "ACTIVE",
+      "subscriptionId": "abc123",
+      "upgradeable": true
+    }
+  ]
+}
 ```
 
 ### productGroups
 
-Calls `GET /v1/subscriptions/productGroups`.
+Returns: `ProductGroupsResponse`
 
 ```java
-var response = client.subscriptions().productGroups("header-value", "header-value");
+import io.github.communitysdks.godaddy.dto.subscriptions.requests.ProductGroupsRequest;
+ProductGroupsRequest request = new ProductGroupsRequest(
+    "value",
+    "value",
+);
+var response = client.subscriptions().productGroups(request);
 ```
 
 ```json
-{}
-```
-
-### cancel
-
-Calls `DELETE /v1/subscriptions/{subscriptionId}`.
-
-```java
-var response = client.subscriptions().cancel(Map.of("sample", true), "header-value", "header-value");
-```
-
-```json
-{}
+[
+  {
+    "productGroupKey": "value",
+    "subscriptionCount": 1
+  }
+]
 ```
 
 ### get
 
-Calls `GET /v1/subscriptions/{subscriptionId}`.
+Returns: `GetResponse`
 
 ```java
-var response = client.subscriptions().get(Map.of("sample", true), "header-value", "header-value");
+import io.github.communitysdks.godaddy.dto.subscriptions.requests.GetRequest;
+GetRequest request = new GetRequest(
+    "value",
+    "value",
+    "value",
+);
+var response = client.subscriptions().get(request);
 ```
 
 ```json
-{}
+{
+  "addons": [
+    {
+      "commitment": "PAID",
+      "pfid": 1,
+      "quantity": 1
+    }
+  ],
+  "billing": {
+    "commitment": "PAID",
+    "pastDueTypes": [
+      "ADDON"
+    ],
+    "renewAt": "value",
+    "status": "CURRENT"
+  },
+  "cancelable": true,
+  "createdAt": "value",
+  "expiresAt": "value",
+  "label": "value",
+  "launchUrl": "value",
+  "paymentProfileId": 1,
+  "priceLocked": true,
+  "product": {
+    "label": "value",
+    "namespace": "value",
+    "pfid": 1,
+    "productGroupKey": "value",
+    "renewalPeriod": 1,
+    "renewalPeriodUnit": "MONTH",
+    "renewalPfid": 1,
+    "supportBillOn": true
+  },
+  "relations": {
+    "children": [
+      "value"
+    ],
+    "parent": "value"
+  },
+  "renewAuto": true,
+  "renewable": true,
+  "status": "ACTIVE",
+  "subscriptionId": "abc123",
+  "upgradeable": true
+}
 ```
 
 ### update
 
-Calls `PATCH /v1/subscriptions/{subscriptionId}`.
+Returns: `UpdateResponse`
 
 ```java
-var response = client.subscriptions().update(Map.of("sample", true), "header-value", Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.subscriptions.requests.UpdateRequest;
+UpdateRequest request = new UpdateRequest(
+    "value",
+    "value",
+    "value",
+    "value",
+);
+var response = client.subscriptions().update(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
+### cancel
+
+Returns: `CancelResponse`
+
+```java
+import io.github.communitysdks.godaddy.dto.subscriptions.requests.CancelRequest;
+CancelRequest request = new CancelRequest(
+    "value",
+    "value",
+    "value",
+);
+var response = client.subscriptions().cancel(request);
+```
+
+```json
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
+```

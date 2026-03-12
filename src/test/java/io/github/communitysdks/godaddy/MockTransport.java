@@ -1,0 +1,22 @@
+package io.github.communitysdks.godaddy;
+
+import io.github.communitysdks.godaddy.runtime.Request;
+import io.github.communitysdks.godaddy.runtime.Response;
+import io.github.communitysdks.godaddy.runtime.Transport;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+final class MockTransport implements Transport {
+    final List<Request> requests = new ArrayList<>();
+    final List<Response> responses = new ArrayList<>();
+
+    void push(Response response) { responses.add(response); }
+
+    @Override
+    public Response send(Request request) {
+        requests.add(request);
+        if (responses.isEmpty()) return new Response(200, Map.of("content-type", "application/json"), "{}");
+        return responses.remove(0);
+    }
+}

@@ -1,48 +1,94 @@
 # AftermarketService
 
-Aftermarket listing and sales endpoints for secondary-market domain workflows.
-
 ## Accessor
 
 ```java
-var service = client.aftermarket();
+var serviceAccessor = client.aftermarket();
 ```
 
-## Endpoints
+## Method Index
+
+- `getListings`: `GetListingsResponse`
+- `deleteListings`: `DeleteListingsResponse`
+- `addExpiryListings`: `AddExpiryListingsResponse`
 
 ### getListings
 
-Calls `GET /v1/customers/{customerId}/auctions/listings`.
+Returns: `GetListingsResponse`
 
 ```java
-var response = client.aftermarket().getListings("sample", List.of("sample"), List.of("sample"), "sample", "sample", 1L, 1L);
+import io.github.communitysdks.godaddy.dto.aftermarket.requests.GetListingsRequest;
+GetListingsRequest request = new GetListingsRequest(
+    "value",
+    "value",
+    "value",
+    "value",
+);
+var response = client.aftermarket().getListings(request);
 ```
 
 ```json
-{}
+{
+  "listings": [
+    {
+      "listingId": 1,
+      "domainName": "example.com",
+      "domainCreatedAt": "example.com",
+      "domainExpiresAt": "example.com",
+      "domainRegistrarIanaId": 1,
+      "pageViewsMonthly": 1,
+      "revenueMonthly": 1,
+      "auctionStartAt": "2022-04-01T02:07:14Z",
+      "auctionEndAt": "2022-04-10T02:07:14Z",
+      "auctionTransferAt": "2022-04-15T02:07:14Z",
+      "auctionSoldAt": "2022-04-20T02:07:14Z",
+      "auctionBookingAmountUsd": 1,
+      "createdAt": "value",
+      "updatedAt": "2024-01-01T00:00:00Z"
+    }
+  ],
+  "pagination": {
+    "first": "value",
+    "previous": "value",
+    "next": "value",
+    "last": "value",
+    "total": 1
+  }
+}
 ```
 
 ### deleteListings
 
-Calls `DELETE /v1/aftermarket/listings`.
+Returns: `DeleteListingsResponse`
 
 ```java
-var response = client.aftermarket().deleteListings(List.of("sample"));
+import io.github.communitysdks.godaddy.dto.aftermarket.requests.DeleteListingsRequest;
+DeleteListingsRequest request = new DeleteListingsRequest(
+    java.util.List.of("value"),
+);
+var response = client.aftermarket().deleteListings(request);
 ```
 
 ```json
-{}
+{
+  "listingActionId": 1
+}
 ```
 
 ### addExpiryListings
 
-Calls `POST /v1/aftermarket/listings/expiry`.
+Returns: `AddExpiryListingsResponse`
 
 ```java
-var response = client.aftermarket().addExpiryListings(List.of("sample"));
+import io.github.communitysdks.godaddy.dto.aftermarket.requests.AddExpiryListingsRequest;
+AddExpiryListingsRequest request = new AddExpiryListingsRequest(
+    java.util.List.of("value"),
+);
+var response = client.aftermarket().addExpiryListings(request);
 ```
 
 ```json
-{}
+{
+  "listingActionId": 1
+}
 ```
-

@@ -1,24 +1,36 @@
 # AgreementsService
 
-Agreement retrieval endpoints for legal terms and consent workflows.
-
 ## Accessor
 
 ```java
-var service = client.agreements();
+var serviceAccessor = client.agreements();
 ```
 
-## Endpoints
+## Method Index
+
+- `get`: `GetResponse`
 
 ### get
 
-Calls `GET /v1/agreements`.
+Returns: `GetResponse`
 
 ```java
-var response = client.agreements().get(List.of("sample"), "header-value", "header-value");
+import io.github.communitysdks.godaddy.dto.agreements.requests.GetRequest;
+GetRequest request = new GetRequest(
+    1L,
+    "value",
+    java.util.List.of("value"),
+);
+var response = client.agreements().get(request);
 ```
 
 ```json
-{}
+[
+  {
+    "agreementKey": "value",
+    "content": "value",
+    "title": "value",
+    "url": "value"
+  }
+]
 ```
-

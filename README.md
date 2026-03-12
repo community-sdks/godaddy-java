@@ -1,43 +1,68 @@
-# GoDaddy Java SDK
+# Unofficial GoDaddy Java SDK
 
-A community-maintained Java SDK for the provided GoDaddy OpenAPI specs.
+## Installation
 
-## Build
+Maven (`pom.xml`):
 
-```bat
-build.bat
+```xml
+<dependency>
+	<groupId>io.github.communitysdks</groupId>
+	<artifactId>godaddy</artifactId>
+	<version>1.0.0</version>
+</dependency>
+```
+
+Gradle:
+
+```gradle
+implementation 'io.github.communitysdks:godaddy:1.0.0'
 ```
 
 ## Getting Started
 
 ```java
-import com.communitysdks.godaddy.Client;
-import com.communitysdks.godaddy.Config;
+import io.github.communitysdks.godaddy.Client;
+import io.github.communitysdks.godaddy.Config;
 
-public class Example {
-    public static void main(String[] args) {
-        Config config = new Config();
-        config.apiKey = "your-api-key";
-        config.apiSecret = "your-api-secret";
+Config config = Config.sandbox("your-key", "your-secret");
+Client client = new Client(config, null);
+```
 
-        Client client = new Client(config, null);
-        var response = client.domains().tlds();
-        System.out.println(response.asString());
-    }
-}
+## Environment Base URLs
+
+Base URLs are configured through `Config`.
+
+- Sandbox (OTE): `https://api.ote-godaddy.com`
+- Production: `https://api.godaddy.com`
+
+`new Config()` defaults to sandbox (OTE).
+
+Use production for all services:
+
+```java
+Config config = Config.production("your-key", "your-secret");
+Client client = new Client(config, null);
+```
+
+Override base URL for specific services (`abuse`, `aftermarket`, `agreements`, `ans`, `auctions`, `certificates`, `countries`, `domains`, `orders`, `parking`, `shoppers`, `subscriptions`):
+
+```java
+Config config = Config.production("your-key", "your-secret");
+config.serviceBaseUrls.put("abuse", Config.SANDBOX_BASE_URL);
+Client client = new Client(config, null);
 ```
 
 ## Services
 
-- [AbuseService](./docs/abuse.md): Abuse reporting and ticket lookup endpoints for phishing, malware, and related investigations.
-- [AftermarketService](./docs/aftermarket.md): Aftermarket listing and sales endpoints for secondary-market domain workflows.
-- [AgreementsService](./docs/agreements.md): Agreement retrieval endpoints for legal terms and consent workflows.
-- [AnsService](./docs/ans.md): Authoritative DNS record and nameserver management endpoints.
-- [AuctionsService](./docs/auctions.md): Auction listing discovery endpoints for GoDaddy Auctions inventory.
-- [CertificatesService](./docs/certificates.md): SSL certificate purchase, validation, lifecycle, and revocation endpoints.
-- [CountriesService](./docs/countries.md): Country and market metadata endpoints used across purchase flows.
-- [DomainsService](./docs/domains.md): Domain availability, purchase, management, transfer, and DNS endpoints.
-- [OrdersService](./docs/orders.md): Order lookup endpoints for commerce and fulfillment status.
-- [ParkingService](./docs/parking.md): Domain parking optimization and template management endpoints.
-- [ShoppersService](./docs/shoppers.md): Shopper profile, account, and delegated access endpoints.
-- [SubscriptionsService](./docs/subscriptions.md): Subscription listing and management endpoints for recurring products.
+- [Abuse](./docs/abuse.md): `client.abuse()`
+- [Aftermarket](./docs/aftermarket.md): `client.aftermarket()`
+- [Agreements](./docs/agreements.md): `client.agreements()`
+- [Ans](./docs/ans.md): `client.ans()`
+- [Auctions](./docs/auctions.md): `client.auctions()`
+- [Certificates](./docs/certificates.md): `client.certificates()`
+- [Countries](./docs/countries.md): `client.countries()`
+- [Domains](./docs/domains.md): `client.domains()`
+- [Orders](./docs/orders.md): `client.orders()`
+- [Parking](./docs/parking.md): `client.parking()`
+- [Shoppers](./docs/shoppers.md): `client.shoppers()`
+- [Subscriptions](./docs/subscriptions.md): `client.subscriptions()`

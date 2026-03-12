@@ -1,84 +1,139 @@
 # ShoppersService
 
-Shopper profile, account, and delegated access endpoints.
-
 ## Accessor
 
 ```java
-var service = client.shoppers();
+var serviceAccessor = client.shoppers();
 ```
 
-## Endpoints
+## Method Index
+
+- `createSubaccount`: `CreateSubaccountResponse`
+- `get`: `GetResponse`
+- `update`: `UpdateResponse`
+- `delete`: `DeleteResponse`
+- `getStatus`: `GetStatusResponse`
+- `changePassword`: `ChangePasswordResponse`
 
 ### createSubaccount
 
-Calls `POST /v1/shoppers/subaccount`.
+Returns: `CreateSubaccountResponse`
 
 ```java
-var response = client.shoppers().createSubaccount(Map.of("sample", true));
+import io.github.communitysdks.godaddy.dto.shoppers.requests.CreateSubaccountRequest;
+CreateSubaccountRequest request = new CreateSubaccountRequest(
+    "value",
+);
+var response = client.shoppers().createSubaccount(request);
 ```
 
 ```json
-{}
+{
+  "customerId": "123456",
+  "shopperId": "987654"
+}
 ```
 
 ### get
 
-Calls `GET /v1/shoppers/{shopperId}`.
+Returns: `GetResponse`
 
 ```java
-var response = client.shoppers().get(Map.of("sample", true), List.of("sample"));
+import io.github.communitysdks.godaddy.dto.shoppers.requests.GetRequest;
+GetRequest request = new GetRequest(
+    "value",
+    java.util.List.of("value"),
+);
+var response = client.shoppers().get(request);
 ```
 
 ```json
-{}
+{
+  "customerId": "123456",
+  "email": "admin@example.com",
+  "externalId": 1,
+  "marketId": "abc123",
+  "nameFirst": "value",
+  "nameLast": "value",
+  "shopperId": "987654"
+}
 ```
 
 ### update
 
-Calls `POST /v1/shoppers/{shopperId}`.
+Returns: `UpdateResponse`
 
 ```java
-var response = client.shoppers().update(Map.of("sample", true), Map.of("sample", true));
+import io.github.communitysdks.godaddy.dto.shoppers.requests.UpdateRequest;
+UpdateRequest request = new UpdateRequest(
+    "value",
+    "value",
+);
+var response = client.shoppers().update(request);
 ```
 
 ```json
-{}
+{
+  "customerId": "123456",
+  "shopperId": "987654"
+}
 ```
 
 ### delete
 
-Calls `DELETE /v1/shoppers/{shopperId}`.
+Returns: `DeleteResponse`
 
 ```java
-var response = client.shoppers().delete(Map.of("sample", true), "sample");
+import io.github.communitysdks.godaddy.dto.shoppers.requests.DeleteRequest;
+DeleteRequest request = new DeleteRequest(
+    "value",
+    "value",
+);
+var response = client.shoppers().delete(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### getStatus
 
-Calls `GET /v1/shoppers/{shopperId}/status`.
+Returns: `GetStatusResponse`
 
 ```java
-var response = client.shoppers().getStatus(Map.of("sample", true), "sample");
+import io.github.communitysdks.godaddy.dto.shoppers.requests.GetStatusRequest;
+GetStatusRequest request = new GetStatusRequest(
+    "value",
+    "value",
+);
+var response = client.shoppers().getStatus(request);
 ```
 
 ```json
-{}
+{
+  "billingState": "ABANDONED"
+}
 ```
 
 ### changePassword
 
-Calls `PUT /v1/shoppers/{shopperId}/factors/password`.
+Returns: `ChangePasswordResponse`
 
 ```java
-var response = client.shoppers().changePassword(Map.of("sample", true), Map.of("sample", true));
+import io.github.communitysdks.godaddy.dto.shoppers.requests.ChangePasswordRequest;
+ChangePasswordRequest request = new ChangePasswordRequest(
+    "value",
+    "value",
+);
+var response = client.shoppers().changePassword(request);
 ```
 
 ```json
-{}
+{
+  "customerId": "123456",
+  "shopperId": "987654"
+}
 ```
-

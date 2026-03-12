@@ -1,24 +1,36 @@
 # AuctionsService
 
-Auction listing discovery endpoints for GoDaddy Auctions inventory.
-
 ## Accessor
 
 ```java
-var service = client.auctions();
+var serviceAccessor = client.auctions();
 ```
 
-## Endpoints
+## Method Index
+
+- `placeBids`: `PlaceBidsResponse`
 
 ### placeBids
 
-Calls `POST /v1/customers/{customerId}/aftermarket/listings/bids`.
+Returns: `PlaceBidsResponse`
 
 ```java
-var response = client.auctions().placeBids("sample", Map.of("sample", true));
+import io.github.communitysdks.godaddy.dto.auctions.requests.PlaceBidsRequest;
+PlaceBidsRequest request = new PlaceBidsRequest(
+    "value",
+    java.util.List.of("value"),
+);
+var response = client.auctions().placeBids(request);
 ```
 
 ```json
-{}
+[
+  {
+    "isHighestBidder": true,
+    "bidId": "e8f0a45d-53c6-49e5-a1f2-08b993960e1b",
+    "bidAmountUsd": 100000000,
+    "status": "SUCCESS",
+    "failureReason": "BID_MIN_NOT_MET"
+  }
+]
 ```
-

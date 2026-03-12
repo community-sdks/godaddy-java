@@ -1,792 +1,1984 @@
 # DomainsService
 
-Domain availability, purchase, management, transfer, and DNS endpoints.
-
 ## Accessor
 
 ```java
-var service = client.domains();
+var serviceAccessor = client.domains();
 ```
 
-## Endpoints
+## Method Index
+
+- `list`: `ListResponse`
+- `getAgreement`: `GetAgreementResponse`
+- `available`: `AvailableResponse`
+- `availableBulk`: `AvailableBulkResponse`
+- `contactsValidate`: `ContactsValidateResponse`
+- `purchase`: `PurchaseResponse`
+- `schema`: `SchemaResponse`
+- `validate`: `ValidateResponse`
+- `suggest`: `SuggestResponse`
+- `tlds`: `TldsResponse`
+- `get`: `GetResponse`
+- `update`: `UpdateResponse`
+- `cancel`: `CancelResponse`
+- `updateContacts`: `UpdateContactsResponse`
+- `cancelPrivacy`: `CancelPrivacyResponse`
+- `purchasePrivacy`: `PurchasePrivacyResponse`
+- `recordReplace`: `RecordReplaceResponse`
+- `recordAdd`: `RecordAddResponse`
+- `recordGet`: `RecordGetResponse`
+- `recordReplaceTypeName`: `RecordReplaceTypeNameResponse`
+- `recordDeleteTypeName`: `RecordDeleteTypeNameResponse`
+- `recordReplaceType`: `RecordReplaceTypeResponse`
+- `renew`: `RenewResponse`
+- `transferIn`: `TransferInResponse`
+- `verifyEmail`: `VerifyEmailResponse`
+- `getV2CustomersCustomerIdDomainsDomain`: `GetV2CustomersCustomerIdDomainsDomainResponse`
+- `getV2CustomersCustomerIdDomainsDomainChangeOfRegistrant`: `GetV2CustomersCustomerIdDomainsDomainChangeOfRegistrantResponse`
+- `deleteV2CustomersCustomerIdDomainsDomainChangeOfRegistrant`: `DeleteV2CustomersCustomerIdDomainsDomainChangeOfRegistrantResponse`
+- `patchV2CustomersCustomerIdDomainsDomainDnssecRecords`: `PatchV2CustomersCustomerIdDomainsDomainDnssecRecordsResponse`
+- `deleteV2CustomersCustomerIdDomainsDomainDnssecRecords`: `DeleteV2CustomersCustomerIdDomainsDomainDnssecRecordsResponse`
+- `putV2CustomersCustomerIdDomainsDomainNameServers`: `PutV2CustomersCustomerIdDomainsDomainNameServersResponse`
+- `getV2CustomersCustomerIdDomainsDomainPrivacyForwarding`: `GetV2CustomersCustomerIdDomainsDomainPrivacyForwardingResponse`
+- `patchV2CustomersCustomerIdDomainsDomainPrivacyForwarding`: `PatchV2CustomersCustomerIdDomainsDomainPrivacyForwardingResponse`
+- `postV2CustomersCustomerIdDomainsDomainRedeem`: `PostV2CustomersCustomerIdDomainsDomainRedeemResponse`
+- `postV2CustomersCustomerIdDomainsDomainRenew`: `PostV2CustomersCustomerIdDomainsDomainRenewResponse`
+- `getV2CustomersCustomerIdDomainsDomainTransfer`: `GetV2CustomersCustomerIdDomainsDomainTransferResponse`
+- `postV2CustomersCustomerIdDomainsDomainTransfer`: `PostV2CustomersCustomerIdDomainsDomainTransferResponse`
+- `postV2CustomersCustomerIdDomainsDomainTransferValidate`: `PostV2CustomersCustomerIdDomainsDomainTransferValidateResponse`
+- `postV2CustomersCustomerIdDomainsDomainTransferInAccept`: `PostV2CustomersCustomerIdDomainsDomainTransferInAcceptResponse`
+- `postV2CustomersCustomerIdDomainsDomainTransferInCancel`: `PostV2CustomersCustomerIdDomainsDomainTransferInCancelResponse`
+- `postV2CustomersCustomerIdDomainsDomainTransferInRestart`: `PostV2CustomersCustomerIdDomainsDomainTransferInRestartResponse`
+- `postV2CustomersCustomerIdDomainsDomainTransferInRetry`: `PostV2CustomersCustomerIdDomainsDomainTransferInRetryResponse`
+- `postV2CustomersCustomerIdDomainsDomainTransferOut`: `PostV2CustomersCustomerIdDomainsDomainTransferOutResponse`
+- `postV2CustomersCustomerIdDomainsDomainTransferOutAccept`: `PostV2CustomersCustomerIdDomainsDomainTransferOutAcceptResponse`
+- `postV2CustomersCustomerIdDomainsDomainTransferOutReject`: `PostV2CustomersCustomerIdDomainsDomainTransferOutRejectResponse`
+- `domainsForwardsGet`: `DomainsForwardsGetResponse`
+- `domainsForwardsPost`: `DomainsForwardsPostResponse`
+- `domainsForwardsPut`: `DomainsForwardsPutResponse`
+- `domainsForwardsDelete`: `DomainsForwardsDeleteResponse`
+- `getV2CustomersCustomerIdDomainsDomainActions`: `GetV2CustomersCustomerIdDomainsDomainActionsResponse`
+- `getV2CustomersCustomerIdDomainsDomainActionsType`: `GetV2CustomersCustomerIdDomainsDomainActionsTypeResponse`
+- `deleteV2CustomersCustomerIdDomainsDomainActionsType`: `DeleteV2CustomersCustomerIdDomainsDomainActionsTypeResponse`
+- `getV2CustomersCustomerIdDomainsNotifications`: `GetV2CustomersCustomerIdDomainsNotificationsResponse`
+- `getV2CustomersCustomerIdDomainsNotificationsOptIn`: `GetV2CustomersCustomerIdDomainsNotificationsOptInResponse`
+- `putV2CustomersCustomerIdDomainsNotificationsOptIn`: `PutV2CustomersCustomerIdDomainsNotificationsOptInResponse`
+- `getV2CustomersCustomerIdDomainsNotificationsSchemasType`: `GetV2CustomersCustomerIdDomainsNotificationsSchemasTypeResponse`
+- `postV2CustomersCustomerIdDomainsNotificationsNotificationIdAcknowledge`: `PostV2CustomersCustomerIdDomainsNotificationsNotificationIdAcknowledgeResponse`
+- `postV2CustomersCustomerIdDomainsRegister`: `PostV2CustomersCustomerIdDomainsRegisterResponse`
+- `getV2CustomersCustomerIdDomainsRegisterSchemaTld`: `GetV2CustomersCustomerIdDomainsRegisterSchemaTldResponse`
+- `postV2CustomersCustomerIdDomainsRegisterValidate`: `PostV2CustomersCustomerIdDomainsRegisterValidateResponse`
+- `getV2DomainsMaintenances`: `GetV2DomainsMaintenancesResponse`
+- `getV2DomainsMaintenancesMaintenanceId`: `GetV2DomainsMaintenancesMaintenanceIdResponse`
+- `getV2DomainsUsageYyyymm`: `GetV2DomainsUsageYyyymmResponse`
+- `patchV2CustomersCustomerIdDomainsDomainContacts`: `PatchV2CustomersCustomerIdDomainsDomainContactsResponse`
+- `postV2CustomersCustomerIdDomainsDomainRegenerateAuthCode`: `PostV2CustomersCustomerIdDomainsDomainRegenerateAuthCodeResponse`
 
 ### list
 
-Calls `GET /v1/domains`.
+Returns: `ListResponse`
 
 ```java
-var response = client.domains().list("header-value", List.of("sample"), List.of("sample"), 1L, "sample", List.of("sample"), "sample");
+import io.github.communitysdks.godaddy.dto.domains.requests.ListRequest;
+ListRequest request = new ListRequest(
+    "value",
+    java.util.List.of("value"),
+    java.util.List.of("value"),
+    1L,
+);
+var response = client.domains().list(request);
 ```
 
 ```json
-{}
+[
+  {
+    "authCode": "value",
+    "contactAdmin": {
+      "addressMailing": {
+        "address1": "value",
+        "address2": "value",
+        "city": "value",
+        "country": "AC",
+        "postalCode": "value",
+        "state": "value"
+      },
+      "email": "admin@example.com",
+      "fax": "value",
+      "jobTitle": "value",
+      "nameFirst": "value",
+      "nameLast": "value",
+      "nameMiddle": "abc123",
+      "organization": "value",
+      "phone": "value"
+    },
+    "contactBilling": {
+      "addressMailing": {
+        "address1": "value",
+        "address2": "value",
+        "city": "value",
+        "country": "AC",
+        "postalCode": "value",
+        "state": "value"
+      },
+      "email": "admin@example.com",
+      "fax": "value",
+      "jobTitle": "value",
+      "nameFirst": "value",
+      "nameLast": "value",
+      "nameMiddle": "abc123",
+      "organization": "value",
+      "phone": "value"
+    },
+    "contactRegistrant": {
+      "addressMailing": {
+        "address1": "value",
+        "address2": "value",
+        "city": "value",
+        "country": "AC",
+        "postalCode": "value",
+        "state": "value"
+      },
+      "email": "admin@example.com",
+      "fax": "value",
+      "jobTitle": "value",
+      "nameFirst": "value",
+      "nameLast": "value",
+      "nameMiddle": "abc123",
+      "organization": "value",
+      "phone": "value"
+    },
+    "contactTech": {
+      "addressMailing": {
+        "address1": "value",
+        "address2": "value",
+        "city": "value",
+        "country": "AC",
+        "postalCode": "value",
+        "state": "value"
+      },
+      "email": "admin@example.com",
+      "fax": "value",
+      "jobTitle": "value",
+      "nameFirst": "value",
+      "nameLast": "value",
+      "nameMiddle": "abc123",
+      "organization": "value",
+      "phone": "value"
+    },
+    "createdAt": "value",
+    "deletedAt": "value",
+    "transferAwayEligibleAt": "value",
+    "domain": "example.com",
+    "domainId": 1,
+    "expirationProtected": true,
+    "expires": "value",
+    "exposeWhois": true,
+    "holdRegistrar": true,
+    "locked": true,
+    "nameServers": [
+      "value"
+    ],
+    "privacy": true,
+    "registrarCreatedAt": "value",
+    "renewAuto": true,
+    "renewDeadline": "value",
+    "renewable": true,
+    "status": "ACTIVE",
+    "transferProtected": true
+  }
+]
 ```
 
 ### getAgreement
 
-Calls `GET /v1/domains/agreements`.
+Returns: `GetAgreementResponse`
 
 ```java
-var response = client.domains().getAgreement(List.of("sample"), Boolean.TRUE, "header-value", Boolean.TRUE);
+import io.github.communitysdks.godaddy.dto.domains.requests.GetAgreementRequest;
+GetAgreementRequest request = new GetAgreementRequest(
+    "value",
+    java.util.List.of("value"),
+    Boolean.TRUE,
+    Boolean.TRUE,
+);
+var response = client.domains().getAgreement(request);
 ```
 
 ```json
-{}
+[
+  {
+    "agreementKey": "value",
+    "content": "value",
+    "title": "value",
+    "url": "value"
+  }
+]
 ```
 
 ### available
 
-Calls `GET /v1/domains/available`.
+Returns: `AvailableResponse`
 
 ```java
-var response = client.domains().available("sample", "sample", Boolean.TRUE);
+import io.github.communitysdks.godaddy.dto.domains.requests.AvailableRequest;
+AvailableRequest request = new AvailableRequest(
+    "value",
+    "value",
+    Boolean.TRUE,
+);
+var response = client.domains().available(request);
 ```
 
 ```json
-{}
+{
+  "available": true,
+  "currency": "value",
+  "definitive": true,
+  "domain": "example.com",
+  "period": 1,
+  "price": 1
+}
 ```
 
 ### availableBulk
 
-Calls `POST /v1/domains/available`.
+Returns: `AvailableBulkResponse`
 
 ```java
-var response = client.domains().availableBulk(List.of("sample"), "sample");
+import io.github.communitysdks.godaddy.dto.domains.requests.AvailableBulkRequest;
+AvailableBulkRequest request = new AvailableBulkRequest(
+    java.util.List.of("value"),
+    "value",
+);
+var response = client.domains().availableBulk(request);
 ```
 
 ```json
-{}
+{
+  "domains": [
+    {
+      "available": true,
+      "currency": "value",
+      "definitive": true,
+      "domain": "example.com",
+      "period": 1,
+      "price": 1
+    }
+  ]
+}
 ```
 
 ### contactsValidate
 
-Calls `POST /v1/domains/contacts/validate`.
+Returns: `ContactsValidateResponse`
 
 ```java
-var response = client.domains().contactsValidate(Map.of("sample", true), "header-value", "sample");
+import io.github.communitysdks.godaddy.dto.domains.requests.ContactsValidateRequest;
+ContactsValidateRequest request = new ContactsValidateRequest(
+    1L,
+    "value",
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().contactsValidate(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### purchase
 
-Calls `POST /v1/domains/purchase`.
+Returns: `PurchaseResponse`
 
 ```java
-var response = client.domains().purchase(Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.PurchaseRequest;
+PurchaseRequest request = new PurchaseRequest(
+    "value",
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().purchase(request);
 ```
 
 ```json
-{}
+{
+  "currency": "value",
+  "itemCount": 1,
+  "orderId": 1,
+  "total": 1
+}
 ```
 
 ### schema
 
-Calls `GET /v1/domains/purchase/schema/{tld}`.
+Returns: `SchemaResponse`
 
 ```java
-var response = client.domains().schema("sample");
+import io.github.communitysdks.godaddy.dto.domains.requests.SchemaRequest;
+SchemaRequest request = new SchemaRequest(
+    "value",
+);
+var response = client.domains().schema(request);
 ```
 
 ```json
-{}
+{
+  "id": "abc123",
+  "models": {},
+  "properties": {},
+  "required": [
+    "value"
+  ]
+}
 ```
 
 ### validate
 
-Calls `POST /v1/domains/purchase/validate`.
+Returns: `ValidateResponse`
 
 ```java
-var response = client.domains().validate(Map.of("sample", true));
+import io.github.communitysdks.godaddy.dto.domains.requests.ValidateRequest;
+ValidateRequest request = new ValidateRequest(
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().validate(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### suggest
 
-Calls `GET /v1/domains/suggest`.
+Returns: `SuggestResponse`
 
 ```java
-var response = client.domains().suggest("header-value", "sample", "sample", "sample", List.of("sample"), List.of("sample"), 1L, 1L, 1L, 1L);
+import io.github.communitysdks.godaddy.dto.domains.requests.SuggestRequest;
+SuggestRequest request = new SuggestRequest(
+    "value",
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().suggest(request);
 ```
 
 ```json
-{}
+[
+  {
+    "domain": "example.com"
+  }
+]
 ```
 
 ### tlds
 
-Calls `GET /v1/domains/tlds`.
+Returns: `TldsResponse`
 
 ```java
-var response = client.domains().tlds();
+import io.github.communitysdks.godaddy.dto.domains.requests.TldsRequest;
+var response = client.domains().tlds(new TldsRequest());
 ```
 
 ```json
-{}
-```
-
-### cancel
-
-Calls `DELETE /v1/domains/{domain}`.
-
-```java
-var response = client.domains().cancel("sample");
-```
-
-```json
-{}
+[
+  {
+    "name": "value",
+    "type": "COUNTRY_CODE"
+  }
+]
 ```
 
 ### get
 
-Calls `GET /v1/domains/{domain}`.
+Returns: `GetResponse`
 
 ```java
-var response = client.domains().get("sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.GetRequest;
+GetRequest request = new GetRequest(
+    "value",
+    "value",
+);
+var response = client.domains().get(request);
 ```
 
 ```json
-{}
+{
+  "authCode": "value",
+  "contactAdmin": {
+    "addressMailing": {
+      "address1": "value",
+      "address2": "value",
+      "city": "value",
+      "country": "AC",
+      "postalCode": "value",
+      "state": "value"
+    },
+    "email": "admin@example.com",
+    "fax": "value",
+    "jobTitle": "value",
+    "nameFirst": "value",
+    "nameLast": "value",
+    "nameMiddle": "abc123",
+    "organization": "value",
+    "phone": "value"
+  },
+  "contactBilling": {
+    "addressMailing": {
+      "address1": "value",
+      "address2": "value",
+      "city": "value",
+      "country": "AC",
+      "postalCode": "value",
+      "state": "value"
+    },
+    "email": "admin@example.com",
+    "fax": "value",
+    "jobTitle": "value",
+    "nameFirst": "value",
+    "nameLast": "value",
+    "nameMiddle": "abc123",
+    "organization": "value",
+    "phone": "value"
+  },
+  "contactRegistrant": {
+    "addressMailing": {
+      "address1": "value",
+      "address2": "value",
+      "city": "value",
+      "country": "AC",
+      "postalCode": "value",
+      "state": "value"
+    },
+    "email": "admin@example.com",
+    "fax": "value",
+    "jobTitle": "value",
+    "nameFirst": "value",
+    "nameLast": "value",
+    "nameMiddle": "abc123",
+    "organization": "value",
+    "phone": "value"
+  },
+  "contactTech": {
+    "addressMailing": {
+      "address1": "value",
+      "address2": "value",
+      "city": "value",
+      "country": "AC",
+      "postalCode": "value",
+      "state": "value"
+    },
+    "email": "admin@example.com",
+    "fax": "value",
+    "jobTitle": "value",
+    "nameFirst": "value",
+    "nameLast": "value",
+    "nameMiddle": "abc123",
+    "organization": "value",
+    "phone": "value"
+  },
+  "createdAt": "value",
+  "deletedAt": "value",
+  "transferAwayEligibleAt": "value",
+  "domain": "example.com",
+  "domainId": 1,
+  "expirationProtected": true,
+  "expires": "value",
+  "exposeRegistrantOrganization": true,
+  "exposeWhois": true,
+  "holdRegistrar": true,
+  "locked": true,
+  "nameServers": [
+    "value"
+  ],
+  "privacy": true,
+  "registrarCreatedAt": "value",
+  "renewAuto": true,
+  "renewDeadline": "value",
+  "status": "ACTIVE",
+  "subaccountId": "abc123",
+  "transferProtected": true,
+  "verifications": {
+    "domainName": {
+      "status": "APPROVED"
+    },
+    "realName": {
+      "status": "APPROVED"
+    }
+  }
+}
 ```
 
 ### update
 
-Calls `PATCH /v1/domains/{domain}`.
+Returns: `UpdateResponse`
 
 ```java
-var response = client.domains().update("sample", Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.UpdateRequest;
+UpdateRequest request = new UpdateRequest(
+    "value",
+    "value",
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().update(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
+```
+
+### cancel
+
+Returns: `CancelResponse`
+
+```java
+import io.github.communitysdks.godaddy.dto.domains.requests.CancelRequest;
+CancelRequest request = new CancelRequest(
+    "value",
+);
+var response = client.domains().cancel(request);
+```
+
+```json
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### updateContacts
 
-Calls `PATCH /v1/domains/{domain}/contacts`.
+Returns: `UpdateContactsResponse`
 
 ```java
-var response = client.domains().updateContacts("sample", Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.UpdateContactsRequest;
+UpdateContactsRequest request = new UpdateContactsRequest(
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().updateContacts(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### cancelPrivacy
 
-Calls `DELETE /v1/domains/{domain}/privacy`.
+Returns: `CancelPrivacyResponse`
 
 ```java
-var response = client.domains().cancelPrivacy("sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.CancelPrivacyRequest;
+CancelPrivacyRequest request = new CancelPrivacyRequest(
+    "value",
+    "value",
+);
+var response = client.domains().cancelPrivacy(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### purchasePrivacy
 
-Calls `POST /v1/domains/{domain}/privacy/purchase`.
+Returns: `PurchasePrivacyResponse`
 
 ```java
-var response = client.domains().purchasePrivacy("sample", Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.PurchasePrivacyRequest;
+PurchasePrivacyRequest request = new PurchasePrivacyRequest(
+    "value",
+    "value",
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().purchasePrivacy(request);
 ```
 
 ```json
-{}
-```
-
-### recordAdd
-
-Calls `PATCH /v1/domains/{domain}/records`.
-
-```java
-var response = client.domains().recordAdd("sample", Map.of("sample", true), "header-value");
-```
-
-```json
-{}
+{
+  "currency": "value",
+  "itemCount": 1,
+  "orderId": 1,
+  "total": 1
+}
 ```
 
 ### recordReplace
 
-Calls `PUT /v1/domains/{domain}/records`.
+Returns: `RecordReplaceResponse`
 
 ```java
-var response = client.domains().recordReplace("sample", Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.RecordReplaceRequest;
+RecordReplaceRequest request = new RecordReplaceRequest(
+    "value",
+    "value",
+    java.util.List.of("value"),
+);
+var response = client.domains().recordReplace(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
+```
+
+### recordAdd
+
+Returns: `RecordAddResponse`
+
+```java
+import io.github.communitysdks.godaddy.dto.domains.requests.RecordAddRequest;
+RecordAddRequest request = new RecordAddRequest(
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().recordAdd(request);
+```
+
+```json
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### recordGet
 
-Calls `GET /v1/domains/{domain}/records/{type}/{name}`.
+Returns: `RecordGetResponse`
 
 ```java
-var response = client.domains().recordGet("sample", "sample", "sample", "header-value", 1L, 1L);
+import io.github.communitysdks.godaddy.dto.domains.requests.RecordGetRequest;
+RecordGetRequest request = new RecordGetRequest(
+    "value",
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().recordGet(request);
 ```
 
 ```json
-{}
+[
+  {
+    "data": "value",
+    "name": "value",
+    "port": 1,
+    "priority": 1,
+    "protocol": "value",
+    "service": "value",
+    "ttl": 1,
+    "type": "A",
+    "weight": 1
+  }
+]
 ```
 
 ### recordReplaceTypeName
 
-Calls `PUT /v1/domains/{domain}/records/{type}/{name}`.
+Returns: `RecordReplaceTypeNameResponse`
 
 ```java
-var response = client.domains().recordReplaceTypeName("sample", "sample", "sample", Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.RecordReplaceTypeNameRequest;
+RecordReplaceTypeNameRequest request = new RecordReplaceTypeNameRequest(
+    "value",
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().recordReplaceTypeName(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### recordDeleteTypeName
 
-Calls `DELETE /v1/domains/{domain}/records/{type}/{name}`.
+Returns: `RecordDeleteTypeNameResponse`
 
 ```java
-var response = client.domains().recordDeleteTypeName("sample", "sample", "sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.RecordDeleteTypeNameRequest;
+RecordDeleteTypeNameRequest request = new RecordDeleteTypeNameRequest(
+    "value",
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().recordDeleteTypeName(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### recordReplaceType
 
-Calls `PUT /v1/domains/{domain}/records/{type}`.
+Returns: `RecordReplaceTypeResponse`
 
 ```java
-var response = client.domains().recordReplaceType("sample", "sample", Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.RecordReplaceTypeRequest;
+RecordReplaceTypeRequest request = new RecordReplaceTypeRequest(
+    "value",
+    "value",
+    "value",
+    java.util.List.of("value"),
+);
+var response = client.domains().recordReplaceType(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### renew
 
-Calls `POST /v1/domains/{domain}/renew`.
+Returns: `RenewResponse`
 
 ```java
-var response = client.domains().renew("sample", "header-value", Map.of("sample", true));
+import io.github.communitysdks.godaddy.dto.domains.requests.RenewRequest;
+RenewRequest request = new RenewRequest(
+    "value",
+    "value",
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().renew(request);
 ```
 
 ```json
-{}
+{
+  "currency": "value",
+  "itemCount": 1,
+  "orderId": 1,
+  "total": 1
+}
 ```
 
 ### transferIn
 
-Calls `POST /v1/domains/{domain}/transfer`.
+Returns: `TransferInResponse`
 
 ```java
-var response = client.domains().transferIn("sample", Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.TransferInRequest;
+TransferInRequest request = new TransferInRequest(
+    "value",
+    "value",
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().transferIn(request);
 ```
 
 ```json
-{}
+{
+  "currency": "value",
+  "itemCount": 1,
+  "orderId": 1,
+  "total": 1
+}
 ```
 
 ### verifyEmail
 
-Calls `POST /v1/domains/{domain}/verifyRegistrantEmail`.
+Returns: `VerifyEmailResponse`
 
 ```java
-var response = client.domains().verifyEmail("sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.VerifyEmailRequest;
+VerifyEmailRequest request = new VerifyEmailRequest(
+    "value",
+    "value",
+);
+var response = client.domains().verifyEmail(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### getV2CustomersCustomerIdDomainsDomain
 
-Calls `GET /v2/customers/{customerId}/domains/{domain}`.
+Returns: `GetV2CustomersCustomerIdDomainsDomainResponse`
 
 ```java
-var response = client.domains().getV2CustomersCustomerIdDomainsDomain("sample", "sample", "header-value", List.of("sample"));
+import io.github.communitysdks.godaddy.dto.domains.requests.GetV2CustomersCustomerIdDomainsDomainRequest;
+GetV2CustomersCustomerIdDomainsDomainRequest request = new GetV2CustomersCustomerIdDomainsDomainRequest(
+    "value",
+    "value",
+    "value",
+    java.util.List.of("value"),
+);
+var response = client.domains().getV2CustomersCustomerIdDomainsDomain(request);
 ```
 
 ```json
-{}
-```
-
-### deleteV2CustomersCustomerIdDomainsDomainChangeOfRegistrant
-
-Calls `DELETE /v2/customers/{customerId}/domains/{domain}/changeOfRegistrant`.
-
-```java
-var response = client.domains().deleteV2CustomersCustomerIdDomainsDomainChangeOfRegistrant("sample", "sample", "header-value");
-```
-
-```json
-{}
+{
+  "domainId": "example.com",
+  "domain": "example.com",
+  "subaccountId": "abc123",
+  "status": "ACTIVE",
+  "expiresAt": "value",
+  "expirationProtected": true,
+  "holdRegistrar": true,
+  "locked": true,
+  "privacy": true,
+  "registrarCreatedAt": "value",
+  "renewAuto": true,
+  "renewDeadline": "value",
+  "transferProtected": true,
+  "createdAt": "value",
+  "deletedAt": "value",
+  "modifiedAt": "value",
+  "transferAwayEligibleAt": "value",
+  "authCode": "value",
+  "nameServers": [
+    "value"
+  ],
+  "hostnames": [
+    "value"
+  ],
+  "renewal": {
+    "renewable": true,
+    "price": 1,
+    "currency": "value"
+  },
+  "verifications": {
+    "icann": "COMPLETED",
+    "realName": "APPROVED",
+    "domainName": "APPROVED"
+  },
+  "contacts": {
+    "registrant": {
+      "contactId": "abc123",
+      "encoding": "ASCII",
+      "nameFirst": "value",
+      "nameMiddle": "abc123",
+      "nameLast": "value",
+      "organization": "value",
+      "jobTitle": "value",
+      "email": "admin@example.com",
+      "phone": "value",
+      "fax": "value",
+      "addressMailing": {
+        "address1": "value",
+        "address2": "value",
+        "city": "value",
+        "country": "AC",
+        "postalCode": "value",
+        "state": "value"
+      },
+      "exposeRegistrantOrganization": true,
+      "exposeWhois": true,
+      "metadata": {},
+      "tlds": [
+        "value"
+      ],
+      "_createdAt": "value",
+      "_modifiedAt": "value",
+      "_deleted": true,
+      "_revision": 1
+    },
+    "admin": {
+      "contactId": "abc123",
+      "encoding": "ASCII",
+      "nameFirst": "value",
+      "nameMiddle": "abc123",
+      "nameLast": "value",
+      "organization": "value",
+      "jobTitle": "value",
+      "email": "admin@example.com",
+      "phone": "value",
+      "fax": "value",
+      "addressMailing": {
+        "address1": "value",
+        "address2": "value",
+        "city": "value",
+        "country": "AC",
+        "postalCode": "value",
+        "state": "value"
+      },
+      "exposeRegistrantOrganization": true,
+      "exposeWhois": true,
+      "metadata": {},
+      "tlds": [
+        "value"
+      ],
+      "_createdAt": "value",
+      "_modifiedAt": "value",
+      "_deleted": true,
+      "_revision": 1
+    },
+    "tech": {
+      "contactId": "abc123",
+      "encoding": "ASCII",
+      "nameFirst": "value",
+      "nameMiddle": "abc123",
+      "nameLast": "value",
+      "organization": "value",
+      "jobTitle": "value",
+      "email": "admin@example.com",
+      "phone": "value",
+      "fax": "value",
+      "addressMailing": {
+        "address1": "value",
+        "address2": "value",
+        "city": "value",
+        "country": "AC",
+        "postalCode": "value",
+        "state": "value"
+      },
+      "exposeRegistrantOrganization": true,
+      "exposeWhois": true,
+      "metadata": {},
+      "tlds": [
+        "value"
+      ],
+      "_createdAt": "value",
+      "_modifiedAt": "value",
+      "_deleted": true,
+      "_revision": 1
+    },
+    "billing": {
+      "contactId": "abc123",
+      "encoding": "ASCII",
+      "nameFirst": "value",
+      "nameMiddle": "abc123",
+      "nameLast": "value",
+      "organization": "value",
+      "jobTitle": "value",
+      "email": "admin@example.com",
+      "phone": "value",
+      "fax": "value",
+      "addressMailing": {
+        "address1": "value",
+        "address2": "value",
+        "city": "value",
+        "country": "AC",
+        "postalCode": "value",
+        "state": "value"
+      },
+      "exposeRegistrantOrganization": true,
+      "exposeWhois": true,
+      "metadata": {},
+      "tlds": [
+        "value"
+      ],
+      "_createdAt": "value",
+      "_modifiedAt": "value",
+      "_deleted": true,
+      "_revision": 1
+    }
+  },
+  "actions": [
+    {
+      "type": "AUTH_CODE_PURCHASE",
+      "origination": "USER",
+      "createdAt": "value",
+      "startedAt": "value",
+      "completedAt": "value",
+      "modifiedAt": "value",
+      "status": "ACCEPTED",
+      "reason": {
+        "code": "value",
+        "message": "value",
+        "fields": [
+          {}
+        ]
+      },
+      "requestId": "abc123"
+    }
+  ],
+  "dnssecRecords": [
+    {
+      "algorithm": "RSAMD5",
+      "keyTag": 1,
+      "digestType": "SHA1",
+      "digest": "value",
+      "flags": "ZSK",
+      "publicKey": "value",
+      "maxSignatureLife": 1
+    }
+  ],
+  "registryStatusCodes": [
+    "ADD_PERIOD"
+  ]
+}
 ```
 
 ### getV2CustomersCustomerIdDomainsDomainChangeOfRegistrant
 
-Calls `GET /v2/customers/{customerId}/domains/{domain}/changeOfRegistrant`.
+Returns: `GetV2CustomersCustomerIdDomainsDomainChangeOfRegistrantResponse`
 
 ```java
-var response = client.domains().getV2CustomersCustomerIdDomainsDomainChangeOfRegistrant("sample", "sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.GetV2CustomersCustomerIdDomainsDomainChangeOfRegistrantRequest;
+GetV2CustomersCustomerIdDomainsDomainChangeOfRegistrantRequest request = new GetV2CustomersCustomerIdDomainsDomainChangeOfRegistrantRequest(
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().getV2CustomersCustomerIdDomainsDomainChangeOfRegistrant(request);
 ```
 
 ```json
-{}
+{
+  "createDate": "2024-01-01T00:00:00Z",
+  "gainingContact": {
+    "email": "admin@example.com",
+    "firstName": "value",
+    "lastName": "value",
+    "organization": "value"
+  },
+  "losingContact": {
+    "email": "admin@example.com",
+    "firstName": "value",
+    "lastName": "value",
+    "organization": "value"
+  },
+  "otherDomainsAffected": 1,
+  "shopperEmail": "admin@example.com"
+}
+```
+
+### deleteV2CustomersCustomerIdDomainsDomainChangeOfRegistrant
+
+Returns: `DeleteV2CustomersCustomerIdDomainsDomainChangeOfRegistrantResponse`
+
+```java
+import io.github.communitysdks.godaddy.dto.domains.requests.DeleteV2CustomersCustomerIdDomainsDomainChangeOfRegistrantRequest;
+DeleteV2CustomersCustomerIdDomainsDomainChangeOfRegistrantRequest request = new DeleteV2CustomersCustomerIdDomainsDomainChangeOfRegistrantRequest(
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().deleteV2CustomersCustomerIdDomainsDomainChangeOfRegistrant(request);
+```
+
+```json
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### patchV2CustomersCustomerIdDomainsDomainDnssecRecords
 
-Calls `PATCH /v2/customers/{customerId}/domains/{domain}/dnssecRecords`.
+Returns: `PatchV2CustomersCustomerIdDomainsDomainDnssecRecordsResponse`
 
 ```java
-var response = client.domains().patchV2CustomersCustomerIdDomainsDomainDnssecRecords("sample", "sample", Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.PatchV2CustomersCustomerIdDomainsDomainDnssecRecordsRequest;
+PatchV2CustomersCustomerIdDomainsDomainDnssecRecordsRequest request = new PatchV2CustomersCustomerIdDomainsDomainDnssecRecordsRequest(
+    "value",
+    "value",
+    "value",
+    java.util.List.of("value"),
+);
+var response = client.domains().patchV2CustomersCustomerIdDomainsDomainDnssecRecords(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### deleteV2CustomersCustomerIdDomainsDomainDnssecRecords
 
-Calls `DELETE /v2/customers/{customerId}/domains/{domain}/dnssecRecords`.
+Returns: `DeleteV2CustomersCustomerIdDomainsDomainDnssecRecordsResponse`
 
 ```java
-var response = client.domains().deleteV2CustomersCustomerIdDomainsDomainDnssecRecords("sample", "sample", Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.DeleteV2CustomersCustomerIdDomainsDomainDnssecRecordsRequest;
+DeleteV2CustomersCustomerIdDomainsDomainDnssecRecordsRequest request = new DeleteV2CustomersCustomerIdDomainsDomainDnssecRecordsRequest(
+    "value",
+    "value",
+    "value",
+    java.util.List.of("value"),
+);
+var response = client.domains().deleteV2CustomersCustomerIdDomainsDomainDnssecRecords(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### putV2CustomersCustomerIdDomainsDomainNameServers
 
-Calls `PUT /v2/customers/{customerId}/domains/{domain}/nameServers`.
+Returns: `PutV2CustomersCustomerIdDomainsDomainNameServersResponse`
 
 ```java
-var response = client.domains().putV2CustomersCustomerIdDomainsDomainNameServers("sample", "sample", Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.PutV2CustomersCustomerIdDomainsDomainNameServersRequest;
+PutV2CustomersCustomerIdDomainsDomainNameServersRequest request = new PutV2CustomersCustomerIdDomainsDomainNameServersRequest(
+    "value",
+    "value",
+    "value",
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().putV2CustomersCustomerIdDomainsDomainNameServers(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### getV2CustomersCustomerIdDomainsDomainPrivacyForwarding
 
-Calls `GET /v2/customers/{customerId}/domains/{domain}/privacy/forwarding`.
+Returns: `GetV2CustomersCustomerIdDomainsDomainPrivacyForwardingResponse`
 
 ```java
-var response = client.domains().getV2CustomersCustomerIdDomainsDomainPrivacyForwarding("sample", "sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.GetV2CustomersCustomerIdDomainsDomainPrivacyForwardingRequest;
+GetV2CustomersCustomerIdDomainsDomainPrivacyForwardingRequest request = new GetV2CustomersCustomerIdDomainsDomainPrivacyForwardingRequest(
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().getV2CustomersCustomerIdDomainsDomainPrivacyForwarding(request);
 ```
 
 ```json
-{}
+{
+  "privateEmail": "admin@example.com",
+  "forwardingEmail": "admin@example.com",
+  "emailPreference": "EMAIL_FILTER"
+}
 ```
 
 ### patchV2CustomersCustomerIdDomainsDomainPrivacyForwarding
 
-Calls `PATCH /v2/customers/{customerId}/domains/{domain}/privacy/forwarding`.
+Returns: `PatchV2CustomersCustomerIdDomainsDomainPrivacyForwardingResponse`
 
 ```java
-var response = client.domains().patchV2CustomersCustomerIdDomainsDomainPrivacyForwarding("sample", "sample", Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.PatchV2CustomersCustomerIdDomainsDomainPrivacyForwardingRequest;
+PatchV2CustomersCustomerIdDomainsDomainPrivacyForwardingRequest request = new PatchV2CustomersCustomerIdDomainsDomainPrivacyForwardingRequest(
+    "value",
+    "value",
+    "value",
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().patchV2CustomersCustomerIdDomainsDomainPrivacyForwarding(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### postV2CustomersCustomerIdDomainsDomainRedeem
 
-Calls `POST /v2/customers/{customerId}/domains/{domain}/redeem`.
+Returns: `PostV2CustomersCustomerIdDomainsDomainRedeemResponse`
 
 ```java
-var response = client.domains().postV2CustomersCustomerIdDomainsDomainRedeem("sample", "sample", "header-value", Map.of("sample", true));
+import io.github.communitysdks.godaddy.dto.domains.requests.PostV2CustomersCustomerIdDomainsDomainRedeemRequest;
+PostV2CustomersCustomerIdDomainsDomainRedeemRequest request = new PostV2CustomersCustomerIdDomainsDomainRedeemRequest(
+    "value",
+    "value",
+    "value",
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().postV2CustomersCustomerIdDomainsDomainRedeem(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### postV2CustomersCustomerIdDomainsDomainRenew
 
-Calls `POST /v2/customers/{customerId}/domains/{domain}/renew`.
+Returns: `PostV2CustomersCustomerIdDomainsDomainRenewResponse`
 
 ```java
-var response = client.domains().postV2CustomersCustomerIdDomainsDomainRenew("sample", "sample", Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.PostV2CustomersCustomerIdDomainsDomainRenewRequest;
+PostV2CustomersCustomerIdDomainsDomainRenewRequest request = new PostV2CustomersCustomerIdDomainsDomainRenewRequest(
+    "value",
+    "value",
+    "value",
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().postV2CustomersCustomerIdDomainsDomainRenew(request);
 ```
 
 ```json
-{}
-```
-
-### postV2CustomersCustomerIdDomainsDomainTransfer
-
-Calls `POST /v2/customers/{customerId}/domains/{domain}/transfer`.
-
-```java
-var response = client.domains().postV2CustomersCustomerIdDomainsDomainTransfer("sample", "sample", Map.of("sample", true), "header-value");
-```
-
-```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### getV2CustomersCustomerIdDomainsDomainTransfer
 
-Calls `GET /v2/customers/{customerId}/domains/{domain}/transfer`.
+Returns: `GetV2CustomersCustomerIdDomainsDomainTransferResponse`
 
 ```java
-var response = client.domains().getV2CustomersCustomerIdDomainsDomainTransfer("sample", "sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.GetV2CustomersCustomerIdDomainsDomainTransferRequest;
+GetV2CustomersCustomerIdDomainsDomainTransferRequest request = new GetV2CustomersCustomerIdDomainsDomainTransferRequest(
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().getV2CustomersCustomerIdDomainsDomainTransfer(request);
 ```
 
 ```json
-{}
+{
+  "transferStatusCodes": [
+    "CLIENT_APPROVED"
+  ]
+}
+```
+
+### postV2CustomersCustomerIdDomainsDomainTransfer
+
+Returns: `PostV2CustomersCustomerIdDomainsDomainTransferResponse`
+
+```java
+import io.github.communitysdks.godaddy.dto.domains.requests.PostV2CustomersCustomerIdDomainsDomainTransferRequest;
+PostV2CustomersCustomerIdDomainsDomainTransferRequest request = new PostV2CustomersCustomerIdDomainsDomainTransferRequest(
+    "value",
+    "value",
+    "value",
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().postV2CustomersCustomerIdDomainsDomainTransfer(request);
+```
+
+```json
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### postV2CustomersCustomerIdDomainsDomainTransferValidate
 
-Calls `POST /v2/customers/{customerId}/domains/{domain}/transfer/validate`.
+Returns: `PostV2CustomersCustomerIdDomainsDomainTransferValidateResponse`
 
 ```java
-var response = client.domains().postV2CustomersCustomerIdDomainsDomainTransferValidate("sample", "sample", Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.PostV2CustomersCustomerIdDomainsDomainTransferValidateRequest;
+PostV2CustomersCustomerIdDomainsDomainTransferValidateRequest request = new PostV2CustomersCustomerIdDomainsDomainTransferValidateRequest(
+    "value",
+    "value",
+    "value",
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().postV2CustomersCustomerIdDomainsDomainTransferValidate(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### postV2CustomersCustomerIdDomainsDomainTransferInAccept
 
-Calls `POST /v2/customers/{customerId}/domains/{domain}/transferInAccept`.
+Returns: `PostV2CustomersCustomerIdDomainsDomainTransferInAcceptResponse`
 
 ```java
-var response = client.domains().postV2CustomersCustomerIdDomainsDomainTransferInAccept("sample", "sample", Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.PostV2CustomersCustomerIdDomainsDomainTransferInAcceptRequest;
+PostV2CustomersCustomerIdDomainsDomainTransferInAcceptRequest request = new PostV2CustomersCustomerIdDomainsDomainTransferInAcceptRequest(
+    "value",
+    "value",
+    "value",
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().postV2CustomersCustomerIdDomainsDomainTransferInAccept(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### postV2CustomersCustomerIdDomainsDomainTransferInCancel
 
-Calls `POST /v2/customers/{customerId}/domains/{domain}/transferInCancel`.
+Returns: `PostV2CustomersCustomerIdDomainsDomainTransferInCancelResponse`
 
 ```java
-var response = client.domains().postV2CustomersCustomerIdDomainsDomainTransferInCancel("sample", "sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.PostV2CustomersCustomerIdDomainsDomainTransferInCancelRequest;
+PostV2CustomersCustomerIdDomainsDomainTransferInCancelRequest request = new PostV2CustomersCustomerIdDomainsDomainTransferInCancelRequest(
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().postV2CustomersCustomerIdDomainsDomainTransferInCancel(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### postV2CustomersCustomerIdDomainsDomainTransferInRestart
 
-Calls `POST /v2/customers/{customerId}/domains/{domain}/transferInRestart`.
+Returns: `PostV2CustomersCustomerIdDomainsDomainTransferInRestartResponse`
 
 ```java
-var response = client.domains().postV2CustomersCustomerIdDomainsDomainTransferInRestart("sample", "sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.PostV2CustomersCustomerIdDomainsDomainTransferInRestartRequest;
+PostV2CustomersCustomerIdDomainsDomainTransferInRestartRequest request = new PostV2CustomersCustomerIdDomainsDomainTransferInRestartRequest(
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().postV2CustomersCustomerIdDomainsDomainTransferInRestart(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### postV2CustomersCustomerIdDomainsDomainTransferInRetry
 
-Calls `POST /v2/customers/{customerId}/domains/{domain}/transferInRetry`.
+Returns: `PostV2CustomersCustomerIdDomainsDomainTransferInRetryResponse`
 
 ```java
-var response = client.domains().postV2CustomersCustomerIdDomainsDomainTransferInRetry("sample", "sample", Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.PostV2CustomersCustomerIdDomainsDomainTransferInRetryRequest;
+PostV2CustomersCustomerIdDomainsDomainTransferInRetryRequest request = new PostV2CustomersCustomerIdDomainsDomainTransferInRetryRequest(
+    "value",
+    "value",
+    "value",
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().postV2CustomersCustomerIdDomainsDomainTransferInRetry(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### postV2CustomersCustomerIdDomainsDomainTransferOut
 
-Calls `POST /v2/customers/{customerId}/domains/{domain}/transferOut`.
+Returns: `PostV2CustomersCustomerIdDomainsDomainTransferOutResponse`
 
 ```java
-var response = client.domains().postV2CustomersCustomerIdDomainsDomainTransferOut("sample", "sample", "sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.PostV2CustomersCustomerIdDomainsDomainTransferOutRequest;
+PostV2CustomersCustomerIdDomainsDomainTransferOutRequest request = new PostV2CustomersCustomerIdDomainsDomainTransferOutRequest(
+    "value",
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().postV2CustomersCustomerIdDomainsDomainTransferOut(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### postV2CustomersCustomerIdDomainsDomainTransferOutAccept
 
-Calls `POST /v2/customers/{customerId}/domains/{domain}/transferOutAccept`.
+Returns: `PostV2CustomersCustomerIdDomainsDomainTransferOutAcceptResponse`
 
 ```java
-var response = client.domains().postV2CustomersCustomerIdDomainsDomainTransferOutAccept("sample", "sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.PostV2CustomersCustomerIdDomainsDomainTransferOutAcceptRequest;
+PostV2CustomersCustomerIdDomainsDomainTransferOutAcceptRequest request = new PostV2CustomersCustomerIdDomainsDomainTransferOutAcceptRequest(
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().postV2CustomersCustomerIdDomainsDomainTransferOutAccept(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### postV2CustomersCustomerIdDomainsDomainTransferOutReject
 
-Calls `POST /v2/customers/{customerId}/domains/{domain}/transferOutReject`.
+Returns: `PostV2CustomersCustomerIdDomainsDomainTransferOutRejectResponse`
 
 ```java
-var response = client.domains().postV2CustomersCustomerIdDomainsDomainTransferOutReject("sample", "sample", "header-value", "sample");
+import io.github.communitysdks.godaddy.dto.domains.requests.PostV2CustomersCustomerIdDomainsDomainTransferOutRejectRequest;
+PostV2CustomersCustomerIdDomainsDomainTransferOutRejectRequest request = new PostV2CustomersCustomerIdDomainsDomainTransferOutRejectRequest(
+    "value",
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().postV2CustomersCustomerIdDomainsDomainTransferOutReject(request);
 ```
 
 ```json
-{}
-```
-
-### domainsForwardsDelete
-
-Calls `DELETE /v2/customers/{customerId}/domains/forwards/{fqdn}`.
-
-```java
-var response = client.domains().domainsForwardsDelete("sample", "sample");
-```
-
-```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### domainsForwardsGet
 
-Calls `GET /v2/customers/{customerId}/domains/forwards/{fqdn}`.
+Returns: `DomainsForwardsGetResponse`
 
 ```java
-var response = client.domains().domainsForwardsGet("sample", "sample", Boolean.TRUE);
+import io.github.communitysdks.godaddy.dto.domains.requests.DomainsForwardsGetRequest;
+DomainsForwardsGetRequest request = new DomainsForwardsGetRequest(
+    "value",
+    "value",
+    Boolean.TRUE,
+);
+var response = client.domains().domainsForwardsGet(request);
 ```
 
 ```json
-{}
-```
-
-### domainsForwardsPut
-
-Calls `PUT /v2/customers/{customerId}/domains/forwards/{fqdn}`.
-
-```java
-var response = client.domains().domainsForwardsPut("sample", "sample", Map.of("sample", true));
-```
-
-```json
-{}
+[
+  {
+    "fqdn": "value",
+    "type": "MASKED",
+    "url": "value",
+    "mask": {
+      "title": "value",
+      "description": "value",
+      "keywords": "value"
+    }
+  }
+]
 ```
 
 ### domainsForwardsPost
 
-Calls `POST /v2/customers/{customerId}/domains/forwards/{fqdn}`.
+Returns: `DomainsForwardsPostResponse`
 
 ```java
-var response = client.domains().domainsForwardsPost("sample", "sample", Map.of("sample", true));
+import io.github.communitysdks.godaddy.dto.domains.requests.DomainsForwardsPostRequest;
+DomainsForwardsPostRequest request = new DomainsForwardsPostRequest(
+    "value",
+    "value",
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().domainsForwardsPost(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
+```
+
+### domainsForwardsPut
+
+Returns: `DomainsForwardsPutResponse`
+
+```java
+import io.github.communitysdks.godaddy.dto.domains.requests.DomainsForwardsPutRequest;
+DomainsForwardsPutRequest request = new DomainsForwardsPutRequest(
+    "value",
+    "value",
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().domainsForwardsPut(request);
+```
+
+```json
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
+```
+
+### domainsForwardsDelete
+
+Returns: `DomainsForwardsDeleteResponse`
+
+```java
+import io.github.communitysdks.godaddy.dto.domains.requests.DomainsForwardsDeleteRequest;
+DomainsForwardsDeleteRequest request = new DomainsForwardsDeleteRequest(
+    "value",
+    "value",
+);
+var response = client.domains().domainsForwardsDelete(request);
+```
+
+```json
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### getV2CustomersCustomerIdDomainsDomainActions
 
-Calls `GET /v2/customers/{customerId}/domains/{domain}/actions`.
+Returns: `GetV2CustomersCustomerIdDomainsDomainActionsResponse`
 
 ```java
-var response = client.domains().getV2CustomersCustomerIdDomainsDomainActions("sample", "sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.GetV2CustomersCustomerIdDomainsDomainActionsRequest;
+GetV2CustomersCustomerIdDomainsDomainActionsRequest request = new GetV2CustomersCustomerIdDomainsDomainActionsRequest(
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().getV2CustomersCustomerIdDomainsDomainActions(request);
 ```
 
 ```json
-{}
-```
-
-### deleteV2CustomersCustomerIdDomainsDomainActionsType
-
-Calls `DELETE /v2/customers/{customerId}/domains/{domain}/actions/{type}`.
-
-```java
-var response = client.domains().deleteV2CustomersCustomerIdDomainsDomainActionsType("sample", "sample", "sample", "header-value");
-```
-
-```json
-{}
+[
+  {
+    "type": "AUTH_CODE_PURCHASE",
+    "origination": "USER",
+    "createdAt": "value",
+    "startedAt": "value",
+    "completedAt": "value",
+    "modifiedAt": "value",
+    "status": "ACCEPTED",
+    "reason": {
+      "code": "value",
+      "message": "value",
+      "fields": [
+        {
+          "code": "value",
+          "message": "value",
+          "path": "value",
+          "pathRelated": "value"
+        }
+      ]
+    },
+    "requestId": "abc123"
+  }
+]
 ```
 
 ### getV2CustomersCustomerIdDomainsDomainActionsType
 
-Calls `GET /v2/customers/{customerId}/domains/{domain}/actions/{type}`.
+Returns: `GetV2CustomersCustomerIdDomainsDomainActionsTypeResponse`
 
 ```java
-var response = client.domains().getV2CustomersCustomerIdDomainsDomainActionsType("sample", "sample", "sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.GetV2CustomersCustomerIdDomainsDomainActionsTypeRequest;
+GetV2CustomersCustomerIdDomainsDomainActionsTypeRequest request = new GetV2CustomersCustomerIdDomainsDomainActionsTypeRequest(
+    "value",
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().getV2CustomersCustomerIdDomainsDomainActionsType(request);
 ```
 
 ```json
-{}
+{
+  "type": "AUTH_CODE_PURCHASE",
+  "origination": "USER",
+  "createdAt": "value",
+  "startedAt": "value",
+  "completedAt": "value",
+  "modifiedAt": "value",
+  "status": "ACCEPTED",
+  "reason": {
+    "code": "value",
+    "message": "value",
+    "fields": [
+      {
+        "code": "value",
+        "message": "value",
+        "path": "value",
+        "pathRelated": "value"
+      }
+    ]
+  },
+  "requestId": "abc123"
+}
+```
+
+### deleteV2CustomersCustomerIdDomainsDomainActionsType
+
+Returns: `DeleteV2CustomersCustomerIdDomainsDomainActionsTypeResponse`
+
+```java
+import io.github.communitysdks.godaddy.dto.domains.requests.DeleteV2CustomersCustomerIdDomainsDomainActionsTypeRequest;
+DeleteV2CustomersCustomerIdDomainsDomainActionsTypeRequest request = new DeleteV2CustomersCustomerIdDomainsDomainActionsTypeRequest(
+    "value",
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().deleteV2CustomersCustomerIdDomainsDomainActionsType(request);
+```
+
+```json
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### getV2CustomersCustomerIdDomainsNotifications
 
-Calls `GET /v2/customers/{customerId}/domains/notifications`.
+Returns: `GetV2CustomersCustomerIdDomainsNotificationsResponse`
 
 ```java
-var response = client.domains().getV2CustomersCustomerIdDomainsNotifications("sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.GetV2CustomersCustomerIdDomainsNotificationsRequest;
+GetV2CustomersCustomerIdDomainsNotificationsRequest request = new GetV2CustomersCustomerIdDomainsNotificationsRequest(
+    "value",
+    "value",
+);
+var response = client.domains().getV2CustomersCustomerIdDomainsNotifications(request);
 ```
 
 ```json
-{}
+{
+  "notificationId": "abc123",
+  "type": "AUTH_CODE_PURCHASE",
+  "resource": "value",
+  "resourceType": "CONTACT",
+  "status": "AWAITING",
+  "addedAt": "value",
+  "requestId": "abc123",
+  "metadata": {}
+}
 ```
 
 ### getV2CustomersCustomerIdDomainsNotificationsOptIn
 
-Calls `GET /v2/customers/{customerId}/domains/notifications/optIn`.
+Returns: `GetV2CustomersCustomerIdDomainsNotificationsOptInResponse`
 
 ```java
-var response = client.domains().getV2CustomersCustomerIdDomainsNotificationsOptIn("sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.GetV2CustomersCustomerIdDomainsNotificationsOptInRequest;
+GetV2CustomersCustomerIdDomainsNotificationsOptInRequest request = new GetV2CustomersCustomerIdDomainsNotificationsOptInRequest(
+    "value",
+    "value",
+);
+var response = client.domains().getV2CustomersCustomerIdDomainsNotificationsOptIn(request);
 ```
 
 ```json
-{}
+[
+  {
+    "notificationId": "abc123",
+    "type": "AUTH_CODE_PURCHASE",
+    "resource": "value",
+    "resourceType": "CONTACT",
+    "status": "AWAITING",
+    "addedAt": "value",
+    "requestId": "abc123",
+    "metadata": {}
+  }
+]
 ```
 
 ### putV2CustomersCustomerIdDomainsNotificationsOptIn
 
-Calls `PUT /v2/customers/{customerId}/domains/notifications/optIn`.
+Returns: `PutV2CustomersCustomerIdDomainsNotificationsOptInResponse`
 
 ```java
-var response = client.domains().putV2CustomersCustomerIdDomainsNotificationsOptIn("sample", List.of("sample"), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.PutV2CustomersCustomerIdDomainsNotificationsOptInRequest;
+PutV2CustomersCustomerIdDomainsNotificationsOptInRequest request = new PutV2CustomersCustomerIdDomainsNotificationsOptInRequest(
+    "value",
+    "value",
+    java.util.List.of("value"),
+);
+var response = client.domains().putV2CustomersCustomerIdDomainsNotificationsOptIn(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### getV2CustomersCustomerIdDomainsNotificationsSchemasType
 
-Calls `GET /v2/customers/{customerId}/domains/notifications/schemas/{type}`.
+Returns: `GetV2CustomersCustomerIdDomainsNotificationsSchemasTypeResponse`
 
 ```java
-var response = client.domains().getV2CustomersCustomerIdDomainsNotificationsSchemasType("sample", "sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.GetV2CustomersCustomerIdDomainsNotificationsSchemasTypeRequest;
+GetV2CustomersCustomerIdDomainsNotificationsSchemasTypeRequest request = new GetV2CustomersCustomerIdDomainsNotificationsSchemasTypeRequest(
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().getV2CustomersCustomerIdDomainsNotificationsSchemasType(request);
 ```
 
 ```json
-{}
+{
+  "id": "abc123",
+  "models": {},
+  "properties": {},
+  "required": [
+    "value"
+  ]
+}
 ```
 
 ### postV2CustomersCustomerIdDomainsNotificationsNotificationIdAcknowledge
 
-Calls `POST /v2/customers/{customerId}/domains/notifications/{notificationId}/acknowledge`.
+Returns: `PostV2CustomersCustomerIdDomainsNotificationsNotificationIdAcknowledgeResponse`
 
 ```java
-var response = client.domains().postV2CustomersCustomerIdDomainsNotificationsNotificationIdAcknowledge("sample", "sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.PostV2CustomersCustomerIdDomainsNotificationsNotificationIdAcknowledgeRequest;
+PostV2CustomersCustomerIdDomainsNotificationsNotificationIdAcknowledgeRequest request = new PostV2CustomersCustomerIdDomainsNotificationsNotificationIdAcknowledgeRequest(
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().postV2CustomersCustomerIdDomainsNotificationsNotificationIdAcknowledge(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### postV2CustomersCustomerIdDomainsRegister
 
-Calls `POST /v2/customers/{customerId}/domains/register`.
+Returns: `PostV2CustomersCustomerIdDomainsRegisterResponse`
 
 ```java
-var response = client.domains().postV2CustomersCustomerIdDomainsRegister("sample", Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.PostV2CustomersCustomerIdDomainsRegisterRequest;
+PostV2CustomersCustomerIdDomainsRegisterRequest request = new PostV2CustomersCustomerIdDomainsRegisterRequest(
+    "value",
+    "value",
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().postV2CustomersCustomerIdDomainsRegister(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### getV2CustomersCustomerIdDomainsRegisterSchemaTld
 
-Calls `GET /v2/customers/{customerId}/domains/register/schema/{tld}`.
+Returns: `GetV2CustomersCustomerIdDomainsRegisterSchemaTldResponse`
 
 ```java
-var response = client.domains().getV2CustomersCustomerIdDomainsRegisterSchemaTld("sample", "sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.GetV2CustomersCustomerIdDomainsRegisterSchemaTldRequest;
+GetV2CustomersCustomerIdDomainsRegisterSchemaTldRequest request = new GetV2CustomersCustomerIdDomainsRegisterSchemaTldRequest(
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().getV2CustomersCustomerIdDomainsRegisterSchemaTld(request);
 ```
 
 ```json
-{}
+{
+  "id": "abc123",
+  "models": {},
+  "properties": {},
+  "required": [
+    "value"
+  ]
+}
 ```
 
 ### postV2CustomersCustomerIdDomainsRegisterValidate
 
-Calls `POST /v2/customers/{customerId}/domains/register/validate`.
+Returns: `PostV2CustomersCustomerIdDomainsRegisterValidateResponse`
 
 ```java
-var response = client.domains().postV2CustomersCustomerIdDomainsRegisterValidate("sample", Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.PostV2CustomersCustomerIdDomainsRegisterValidateRequest;
+PostV2CustomersCustomerIdDomainsRegisterValidateRequest request = new PostV2CustomersCustomerIdDomainsRegisterValidateRequest(
+    "value",
+    "value",
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().postV2CustomersCustomerIdDomainsRegisterValidate(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### getV2DomainsMaintenances
 
-Calls `GET /v2/domains/maintenances`.
+Returns: `GetV2DomainsMaintenancesResponse`
 
 ```java
-var response = client.domains().getV2DomainsMaintenances("header-value", List.of("sample"), "sample", "sample", 1L);
+import io.github.communitysdks.godaddy.dto.domains.requests.GetV2DomainsMaintenancesRequest;
+GetV2DomainsMaintenancesRequest request = new GetV2DomainsMaintenancesRequest(
+    "value",
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().getV2DomainsMaintenances(request);
 ```
 
 ```json
-{}
+{
+  "createdAt": "value",
+  "endsAt": "value",
+  "environment": "OTE",
+  "maintenanceId": "abc123",
+  "modifiedAt": "value",
+  "reason": "EMERGENCY",
+  "startsAt": "value",
+  "status": "ACTIVE",
+  "summary": "value",
+  "tlds": [
+    "value"
+  ],
+  "type": "API"
+}
 ```
 
 ### getV2DomainsMaintenancesMaintenanceId
 
-Calls `GET /v2/domains/maintenances/{maintenanceId}`.
+Returns: `GetV2DomainsMaintenancesMaintenanceIdResponse`
 
 ```java
-var response = client.domains().getV2DomainsMaintenancesMaintenanceId("sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.GetV2DomainsMaintenancesMaintenanceIdRequest;
+GetV2DomainsMaintenancesMaintenanceIdRequest request = new GetV2DomainsMaintenancesMaintenanceIdRequest(
+    "value",
+    "value",
+);
+var response = client.domains().getV2DomainsMaintenancesMaintenanceId(request);
 ```
 
 ```json
-{}
+{
+  "createdAt": "value",
+  "endsAt": "value",
+  "environment": "OTE",
+  "maintenanceId": "abc123",
+  "modifiedAt": "value",
+  "reason": "EMERGENCY",
+  "startsAt": "value",
+  "status": "ACTIVE",
+  "summary": "value",
+  "systems": [
+    {
+      "name": "DOMAIN_CHECKS",
+      "impact": [
+        "DELAYED"
+      ]
+    }
+  ],
+  "tlds": [
+    "value"
+  ],
+  "type": "API"
+}
 ```
 
 ### getV2DomainsUsageYyyymm
 
-Calls `GET /v2/domains/usage/{yyyymm}`.
+Returns: `GetV2DomainsUsageYyyymmResponse`
 
 ```java
-var response = client.domains().getV2DomainsUsageYyyymm("sample", "header-value", List.of("sample"));
+import io.github.communitysdks.godaddy.dto.domains.requests.GetV2DomainsUsageYyyymmRequest;
+GetV2DomainsUsageYyyymmRequest request = new GetV2DomainsUsageYyyymmRequest(
+    "value",
+    "value",
+    java.util.List.of("value"),
+);
+var response = client.domains().getV2DomainsUsageYyyymm(request);
 ```
 
 ```json
-{}
+{
+  "details": [
+    {
+      "path": "value",
+      "total": 1
+    }
+  ],
+  "quota": 1,
+  "total": 1,
+  "yyyymm": "value"
+}
 ```
 
 ### patchV2CustomersCustomerIdDomainsDomainContacts
 
-Calls `PATCH /v2/customers/{customerId}/domains/{domain}/contacts`.
+Returns: `PatchV2CustomersCustomerIdDomainsDomainContactsResponse`
 
 ```java
-var response = client.domains().patchV2CustomersCustomerIdDomainsDomainContacts("sample", "sample", Map.of("sample", true), "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.PatchV2CustomersCustomerIdDomainsDomainContactsRequest;
+PatchV2CustomersCustomerIdDomainsDomainContactsRequest request = new PatchV2CustomersCustomerIdDomainsDomainContactsRequest(
+    "value",
+    "value",
+    "value",
+    java.util.Map.of("key", "value"),
+);
+var response = client.domains().patchV2CustomersCustomerIdDomainsDomainContacts(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
 
 ### postV2CustomersCustomerIdDomainsDomainRegenerateAuthCode
 
-Calls `POST /v2/customers/{customerId}/domains/{domain}/regenerateAuthCode`.
+Returns: `PostV2CustomersCustomerIdDomainsDomainRegenerateAuthCodeResponse`
 
 ```java
-var response = client.domains().postV2CustomersCustomerIdDomainsDomainRegenerateAuthCode("sample", "sample", "header-value");
+import io.github.communitysdks.godaddy.dto.domains.requests.PostV2CustomersCustomerIdDomainsDomainRegenerateAuthCodeRequest;
+PostV2CustomersCustomerIdDomainsDomainRegenerateAuthCodeRequest request = new PostV2CustomersCustomerIdDomainsDomainRegenerateAuthCodeRequest(
+    "value",
+    "value",
+    "value",
+);
+var response = client.domains().postV2CustomersCustomerIdDomainsDomainRegenerateAuthCode(request);
 ```
 
 ```json
-{}
+{
+  "code": "SUCCESS",
+  "message": "Request completed successfully"
+}
 ```
-

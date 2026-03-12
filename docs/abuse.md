@@ -1,84 +1,165 @@
 # AbuseService
 
-Abuse reporting and ticket lookup endpoints for phishing, malware, and related investigations.
-
 ## Accessor
 
 ```java
-var service = client.abuse();
+var serviceAccessor = client.abuse();
 ```
 
-## Endpoints
+## Method Index
+
+- `getTickets`: `GetTicketsResponse`
+- `createTicket`: `CreateTicketResponse`
+- `getTicketInfo`: `GetTicketInfoResponse`
+- `getTicketsV2`: `GetTicketsV2Response`
+- `createTicketV2`: `CreateTicketV2Response`
+- `getTicketInfoV2`: `GetTicketInfoV2Response`
 
 ### getTickets
 
-Calls `GET /v1/abuse/tickets`.
+Returns: `GetTicketsResponse`
 
 ```java
-var response = client.abuse().getTickets("sample", Boolean.TRUE, "sample", "sample", "sample", "sample", 1L, 1L);
+import io.github.communitysdks.godaddy.dto.abuse.requests.GetTicketsRequest;
+GetTicketsRequest request = new GetTicketsRequest(
+    "value",
+    Boolean.TRUE,
+    "value",
+    "value",
+);
+var response = client.abuse().getTickets(request);
 ```
 
 ```json
-{}
+{
+  "pagination": {
+    "first": "value",
+    "last": "value",
+    "next": "value",
+    "previous": "value",
+    "total": 1
+  },
+  "ticketIds": [
+    "TCK-100001"
+  ]
+}
 ```
 
 ### createTicket
 
-Calls `POST /v1/abuse/tickets`.
+Returns: `CreateTicketResponse`
 
 ```java
-var response = client.abuse().createTicket(Map.of("sample", true));
+import io.github.communitysdks.godaddy.dto.abuse.requests.CreateTicketRequest;
+CreateTicketRequest request = new CreateTicketRequest(
+    java.util.Map.of("key", "value"),
+);
+var response = client.abuse().createTicket(request);
 ```
 
 ```json
-{}
+{
+  "u_number": "value"
+}
 ```
 
 ### getTicketInfo
 
-Calls `GET /v1/abuse/tickets/{ticketId}`.
+Returns: `GetTicketInfoResponse`
 
 ```java
-var response = client.abuse().getTicketInfo("sample");
+import io.github.communitysdks.godaddy.dto.abuse.requests.GetTicketInfoRequest;
+GetTicketInfoRequest request = new GetTicketInfoRequest(
+    "value",
+);
+var response = client.abuse().getTicketInfo(request);
 ```
 
 ```json
-{}
+{
+  "closed": true,
+  "closedAt": "value",
+  "createdAt": "value",
+  "domainIp": "example.com",
+  "reporter": "value",
+  "source": "value",
+  "target": "value",
+  "ticketId": "TCK-100001",
+  "type": "A_RECORD"
+}
 ```
 
 ### getTicketsV2
 
-Calls `GET /v2/abuse/tickets`.
+Returns: `GetTicketsV2Response`
 
 ```java
-var response = client.abuse().getTicketsV2("sample", Boolean.TRUE, "sample", "sample", "sample", "sample", 1L, 1L);
+import io.github.communitysdks.godaddy.dto.abuse.requests.GetTicketsV2Request;
+GetTicketsV2Request request = new GetTicketsV2Request(
+    "value",
+    Boolean.TRUE,
+    "value",
+    "value",
+);
+var response = client.abuse().getTicketsV2(request);
 ```
 
 ```json
-{}
+{
+  "pagination": {
+    "first": "value",
+    "last": "value",
+    "next": "value",
+    "previous": "value",
+    "total": 1
+  },
+  "ticketIds": [
+    "TCK-100001"
+  ]
+}
 ```
 
 ### createTicketV2
 
-Calls `POST /v2/abuse/tickets`.
+Returns: `CreateTicketV2Response`
 
 ```java
-var response = client.abuse().createTicketV2(Map.of("sample", true));
+import io.github.communitysdks.godaddy.dto.abuse.requests.CreateTicketV2Request;
+CreateTicketV2Request request = new CreateTicketV2Request(
+    java.util.Map.of("key", "value"),
+);
+var response = client.abuse().createTicketV2(request);
 ```
 
 ```json
-{}
+{
+  "u_number": "value"
+}
 ```
 
 ### getTicketInfoV2
 
-Calls `GET /v2/abuse/tickets/{ticketId}`.
+Returns: `GetTicketInfoV2Response`
 
 ```java
-var response = client.abuse().getTicketInfoV2("sample");
+import io.github.communitysdks.godaddy.dto.abuse.requests.GetTicketInfoV2Request;
+GetTicketInfoV2Request request = new GetTicketInfoV2Request(
+    "value",
+);
+var response = client.abuse().getTicketInfoV2(request);
 ```
 
 ```json
-{}
+{
+  "closed": true,
+  "closedAt": "value",
+  "createdAt": "value",
+  "domainIp": "example.com",
+  "reporter": "value",
+  "source": "value",
+  "target": "value",
+  "ticketId": "TCK-100001",
+  "type": "A_RECORD",
+  "closeReason": "ACTIONED"
+}
 ```
-
